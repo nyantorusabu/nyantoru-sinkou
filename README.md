@@ -8,7 +8,7 @@
 
 [![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/mino-hobby-pro/sand-smoke-proxy)  
 [![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://koyeb.com/deploy?type=github&repository=https://github.com/mino-hobby-pro/sand-smoke-proxy)  
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/nyantorusabu/nyantoru-sinkou/main)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/nyantorusabu/nyantoru-sinkou)
 
 
 ---
