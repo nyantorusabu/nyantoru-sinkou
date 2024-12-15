@@ -67,7 +67,7 @@
             <div class="video-card pure-u-1 pure-u-md-1-4">
                 {% if result["type"] == "video" %}
                 <a href="/watch?v={{ result['id'] }}">
-                    <img loading="lazy" src="{% if proxy == "True" %}/thumbnail?v={{ result['id'] }}{% else %}https://img.youtube.com/vi/{{ result['id'] }}/0.jpg{% endif %}" onerror="document.cookie = 'proxy=True;max-age=2592000;';">
+                    <img loading="lazy" src="{% if proxy == "True" %}/thumbnail?v={{ result['id'] }}{% else %}https://api.codetabs.com/v1/proxy/?quest=https://img.youtube.com/vi/{{ result['id'] }}/0.jpg{% endif %}" onerror="document.cookie = 'proxy=True;max-age=2592000;';">
                     <p class="length">{{result["length"]}}</p>
                     <p dir="auto">{{ result['title'] }}</p>
                 </a>
@@ -86,7 +86,7 @@
                 </a>
                 {% elif result["type"] == "playlist" %}
                 <a href="/playlist?list={{result["id"]}}">
-                    <img loading="lazy" class="thumbnail" src="{% if proxy == "True" %}/thumbnail?v={{ result['thumbnail'] }}{% else %}https://img.youtube.com/vi/{{ result['thumbnail'] }}/0.jpg{% endif %}">
+                    <img loading="lazy" class="thumbnail" src="{% if proxy == "True" %}/thumbnail?v={{ result['thumbnail'] }}{% else %}https://api.codetabs.com/v1/proxy/?quest=https://img.youtube.com/vi/{{ result['thumbnail'] }}/0.jpg{% endif %}">
                     <p class="length">{{result["count"]}}個の動画</p>
                     <p dir="auto">{{result["title"]}}</p>
                 </a>
