@@ -338,7 +338,7 @@
             <h3>関連動画</h3>
             {% for re in res %}
             <a href="/watch?v={{ re['id'] }}" class="thumbnail">
-                <img src="https://img.youtube.com/vi/{{ re['id'] }}/0.jpg" alt="関連動画" />
+                <img src="https://api.codetabs.com/v1/proxy/?quest=https://img.youtube.com/vi/{{ re['id'] }}/0.jpg" alt="関連動画" />
                 <div class="thumbnail-text">
                     <p class="title Padding">{{ re["title"] }}</p>
                     <p class="related-videos-title channel-name">{{ re["author"] }}</p>
