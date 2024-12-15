@@ -80,12 +80,12 @@
     <div id="contents">
         <div id="player-container">
             <span class="video-player-area-a">
-                <video playsinline="" poster="https://img.youtube.com/vi/{{ g_videoid }}/0.jpg" id="player" controls="">
+                <video playsinline="" poster="https://api.codetabs.com/v1/proxy/?quest=https://img.youtube.com/vi/{{ g_videoid }}/0.jpg" id="player" controls="">
                     <source src="{{ videourls[0] }}" />
                 </video>
             </span>
             <h2 id="video-title">{{ videotitle }}</h2>
-            <img id="author-icon" src="{{authoricon}}" /> <span id="channel-name">{{ author }}</span>
+            <img id="author-icon" src="{{authoricon}}" /> <span id="channel-name"><a href=channel/{{ author }}>{{ author }}</span>
             <p>
                 投稿日: <span id="published-date"></span> ・ 再生回数: <span class="view-count" id="view-count"></span> ・ 高評価数: <span class="like-count" id="like-count"></span>
             </p>
