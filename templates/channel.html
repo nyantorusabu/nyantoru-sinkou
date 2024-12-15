@@ -2,7 +2,7 @@
 <html lang="ja">
 
 <head>
-    <title>FlickFusion_MINO</title>
+    <title>NyankoSmoke</title>
     <link rel="icon" type="image/png" href="https://tse3.mm.bing.net/th?id=OIG2.ownl1PnGUyyNG6RauVkR&pid=ImgGn">
     <link rel="shortcut icon" href="https://tse3.mm.bing.net/th?id=OIG2.ownl1PnGUyyNG6RauVkR&pid=ImgGn" type="image/png">
     <link rel="apple-touch-icon" sizes="256x256" href="https://tse3.mm.bing.net/th?id=OIG2.ownl1PnGUyyNG6RauVkR&pid=ImgGn">
@@ -77,7 +77,7 @@
                             <a href="/channel/{{result["id"]}}">
                                 
                                     <center>
-                                        <img loading="lazy" tabindex="-1" style="width:56.25%" src="{{result["thumbnail"]}}">
+                                        <img loading="lazy" tabindex="-1" style="width:56.25%" src="https://api.codetabs.com/v1/proxy/?quest={{result["thumbnail"]}}">
                                     </center>
                                 
                                 <p dir="auto">{{result["author"]}}</p>
@@ -86,7 +86,7 @@
                         <a style="width:100%" href="/playlist?list={{result["id"]}}">
                 
                             <div class="thumbnail">
-                                <img loading="lazy" tabindex="-1" class="thumbnail" src="{% if proxy == "True" %}/thumbnail?v={{ result['thumbnail'] }}{% else %}https://img.youtube.com/vi/{{ result['thumbnail'] }}/0.jpg{% endif %}">
+                                <img loading="lazy" tabindex="-1" class="thumbnail" src="{% if proxy == "True" %}/thumbnail?v={{ result['thumbnail'] }}{% else %}https://api.codetabs.com/v1/proxy/?quest=https://img.youtube.com/vi/{{ result['thumbnail'] }}/0.jpg{% endif %}">
                                 <p class="length">{{result["count"]}}個の動画</p>
                             </div>
                         
