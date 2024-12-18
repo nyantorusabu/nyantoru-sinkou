@@ -224,7 +224,7 @@ video_apis = [
     r"https://script.google.com/macros/s/AKfycbxYjOWULjin5kpp-NcjjjGujVX3wy1TEJVUR2AZtR6-5c_q7GBr1Nctl2_Kat4lSboD/exec?videoId=",
 ]
 
-max_time = 20  # 最大待機時間の設定
+max_time = 30  # 最大待機時間の設定
 max_api_wait_time = 5  # APIリクエストの最大待機時間
 
 class APItimeoutError(Exception):
@@ -709,6 +709,14 @@ def list_page(response: Response, request: Request):
     # 必要に応じてデータを取得
     # ここでは単純にhtmlを返す
     return template("iframe.html", {"request": request})
+
+@app.get("/health", response_class=HTMLResponse)
+def list_page(response: Response, request: Request):
+    return template("health.html", {"request": request})
+
+@app.get("/tell", response_class=HTMLResponse)
+def list_page(response: Response, request: Request):
+    return template("tell.html", {"request": request})
 
     
 @app.exception_handler(500)
