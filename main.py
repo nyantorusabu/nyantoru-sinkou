@@ -774,3 +774,43 @@ def video(
         "author": t[5],
         "proxy": proxy
     })
+
+# 新しい変数をteigiした
+max_stream_api_wait_time = 7  # ストリームAPIリクエストの最大待機時間
+
+@app.get('/watch/{v}/stream', response_class=HTMLResponse)
+def stream(
+    v: str, 
+    response: Response, 
+    request: Request
+):
+    stream_url = None
+    start_time = time.time()  # リクエスト開始時刻を記録
+
+    # タイムアウト処理を考慮してループ
+    while True:
+        try:
+            api_response = requests.get(f"https://new-era-hack.vercel.app/api/sand-smoke/stream/{urllib.parse.quote(v)}", timeout=max_stream_api_wait_time)
+            
+            if api_response.status_code == 200:
+                # ストリームURLを取得
+                data = api_response.json()
+                stream_url = data.get("stream_url")
+                break  # 成功したらループを抜ける
+            else:
+                print(f"APIエラー: ステータスコード {api_response.status_code}")
+        except requests.Timeout:
+            print("タイムアウトが発生しました")
+            if time.time() - start_time >= max_stream_api_wait_time:
+                # 最大待機時間を超えた場合はAPItimeoutErrorを発生させる
+                raise APItimeoutError("ストリームAPIがタイムアウトしました")
+        except Exception as e:
+            print(f"ストリームURLの取得中にエラーが発生しました: {e}")
+            break  # それ以外のエラーが発生した場合はループを抜ける
+
+    # テンプレートにストリームURLを渡す
+    return template('stream.html', {
+        "request": request,
+        "videoid": v,
+        "stream_url": stream_url  # ストリームURLをテンプレートに渡す
+    })

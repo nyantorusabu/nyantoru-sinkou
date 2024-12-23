@@ -6,6 +6,35 @@
     <link rel="stylesheet" href="/css/ionicons.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/2.0.6/pure-min.css" />
     <link rel="stylesheet" href="/css/video-html.css">
+    <style>
+        /* ポップアップオーバーレイのスタイル */
+        .overlay {
+            display: none; /* 最初は非表示 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .popup {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            position: relative;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
@@ -38,6 +67,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
+        // オートコンプリート機能
         $("#searchbox").autocomplete({
             source: function (request, response) {
                 var url = "/suggest?keyword=" + encodeURIComponent(request.term);
@@ -94,8 +124,9 @@
                 <button id="youtube-btn" onclick="changeVideoSource('youtube')">YouTubeから情報取得</button>
                 <button id="invidious-btn" onclick="changeVideoSource('invidious')">Firebaseから情報取得</button>
                 <button id="download-btn" onclick="downloadVideo()">動画をダウンロード</button>
-                <button id="share-btn" onclick="shareVideo('{{ g_videoid }}')">動画をシェア</button> <!-- シェアボタンを追加 -->
-                <button id="high-quality-btn" onclick="fetchHighQualityVideo()">高画質化</button> <!-- 高画質化ボタンを追加 -->
+                <button id="share-btn" onclick="shareVideo('{{ g_videoid }}')">動画をシェア</button>
+                <button id="high-quality-btn" onclick="fetchHighQualityVideo()">高画質化</button>
+                <button id="get-video-btn" onclick="openVideoPopup()">動画を取得</button> <!-- 追加したボタン -->
             </div>
 
             <style>
@@ -331,7 +362,36 @@
                         alert('高画質動画の取得に失敗しました');
                     }
                 }
+
+                // ポップアップオーバーレイを開く関数
+                function openVideoPopup() {
+                    const overlay = document.getElementById('videoOverlay');
+                    overlay.style.display = 'flex'; // オーバーレイを表示
+                    const playerStream = document.getElementById('streamPlayer');
+                    playerStream.src = window.location.href + '/stream'; // 現在のURLに/streamを追加
+                    playerStream.play();
+                }
+
+                // ポップアップを閉じる関数
+                function closeVideoPopup() {
+                    const overlay = document.getElementById('videoOverlay');
+                    overlay.style.display = 'none'; // オーバーレイを非表示
+                    const playerStream = document.getElementById('streamPlayer');
+                    playerStream.pause(); // 動画を一時停止
+                    playerStream.src = ''; // ソースをクリア
+                }
             </script>
+
+            <!-- ポップアップオーバーレイ -->
+            <div class="overlay" id="videoOverlay">
+                <div class="popup">
+                    <span class="close-btn" onclick="closeVideoPopup()">✖️</span>
+                    <video id="streamPlayer" controls style="width: 100%; height: auto;">
+                        <source src="" type="video/mp4" />
+                        お使いのブラウザは動画タグに対応していません。
+                    </video>
+                </div>
+            </div>
         </div>
 
         <div class="sidebar">
@@ -389,3 +449,4 @@
     </script>
 </body>
 </html>
+
